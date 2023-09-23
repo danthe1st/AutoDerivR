@@ -8,7 +8,7 @@ The class [`Node`](src/main/java/io/github/danthe1st/autoderivr/operations/Node.
 `Node`s can be evaluated with certain values of variables.
 Also, it is possible to symbolically calculate the derivative of a `Node` with respect to a given `Variable` using the `derivative` method.
 
-Examples can be found in the [tests](src/test/java),e.g. the [`TrigTests`](src/test/java/io/github/danthe1st/autoderivr/tests/arithmetic/concrete/TrigTests.java) class.
+Examples can be found in the [tests](src/test/java), e.g. the [`CombinedTests`](src/test/java/io/github/danthe1st/autoderivr/tests/CombinedTests.java) or [`TrigTests`](src/test/java/io/github/danthe1st/autoderivr/tests/arithmetic/concrete/TrigTests.java) classes.
 
 ### Supported operations
 The following operations are supported:
