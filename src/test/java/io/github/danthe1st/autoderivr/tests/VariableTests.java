@@ -1,4 +1,4 @@
-package io.github.autoderivr.tests;
+package io.github.danthe1st.autoderivr.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
