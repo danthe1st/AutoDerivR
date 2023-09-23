@@ -11,15 +11,18 @@ import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 
+/**
+ * @see Multiply
+ */
 class MultiplyTests {
 	
 	@Test
 	void testCalculate() {
 		Variable x = new Variable("x");
 		Variable y = new Variable("y");
-		assertEquals(1, new Multiply(x, Constant.ONE).calculateDouble(Map.of(x, 1.)));
-		assertEquals(2, new Multiply(x, Constant.ONE).calculateDouble(Map.of(x, 2.)));
-		assertEquals(6, new Multiply(x, y).calculateDouble(Map.of(x, 2., y, 3.)));
+		assertEquals(1, new Multiply(x, Constant.ONE).evaluate(Map.of(x, 1.)));
+		assertEquals(2, new Multiply(x, Constant.ONE).evaluate(Map.of(x, 2.)));
+		assertEquals(6, new Multiply(x, y).evaluate(Map.of(x, 2., y, 3.)));
 	}
 	
 	@Test

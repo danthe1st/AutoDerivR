@@ -11,15 +11,18 @@ import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Subtract;
 
+/**
+ * @see Subtract
+ */
 class SubtractTests {
 	
 	@Test
 	void testCalculate() {
 		Variable x = new Variable("x");
 		Variable y = new Variable("y");
-		assertEquals(0, new Subtract(x, Constant.ONE).calculateDouble(Map.of(x, 1.)));
-		assertEquals(1, new Subtract(x, Constant.ONE).calculateDouble(Map.of(x, 2.)));
-		assertEquals(-1, new Subtract(x, y).calculateDouble(Map.of(x, 2., y, 3.)));
+		assertEquals(0, new Subtract(x, Constant.ONE).evaluate(Map.of(x, 1.)));
+		assertEquals(1, new Subtract(x, Constant.ONE).evaluate(Map.of(x, 2.)));
+		assertEquals(-1, new Subtract(x, y).evaluate(Map.of(x, 2., y, 3.)));
 	}
 	
 	@Test

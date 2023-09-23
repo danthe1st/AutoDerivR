@@ -1,4 +1,4 @@
-package io.github.autoderivr.tests.arithmetic.basic.concrete;
+package io.github.autoderivr.tests.arithmetic.concrete;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,6 +14,9 @@ import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Subtract;
 import io.github.danthe1st.autoderivr.operations.arithmetic.concrete.TrigFunctions;
 
+/**
+ * @see TrigFunctions
+ */
 class TrigTests {
 	@Test
 	void testStringRepresentation() {
@@ -30,17 +33,17 @@ class TrigTests {
 	void testCalculate() {
 		Variable x = new Variable("x");
 		
-		assertEquals(1, TrigFunctions.sin(new Variable("x")).calculateDouble(Map.of(x, Math.PI / 2)), 0.0000001);
-		assertEquals(0, TrigFunctions.sin(new Variable("x")).calculateDouble(Map.of(x, 0.)), 0.0000001);
-		assertEquals(0, TrigFunctions.cos(new Variable("x")).calculateDouble(Map.of(x, Math.PI / 2)), 0.0000001);
-		assertEquals(1, TrigFunctions.cos(new Variable("x")).calculateDouble(Map.of(x, 0.)), 0.0000001);
-		assertEquals(0, TrigFunctions.tan(new Variable("x")).calculateDouble(Map.of(x, 0.)), 0.0000001);
+		assertEquals(1, TrigFunctions.sin(new Variable("x")).evaluate(Map.of(x, Math.PI / 2)), 0.0000001);
+		assertEquals(0, TrigFunctions.sin(new Variable("x")).evaluate(Map.of(x, 0.)), 0.0000001);
+		assertEquals(0, TrigFunctions.cos(new Variable("x")).evaluate(Map.of(x, Math.PI / 2)), 0.0000001);
+		assertEquals(1, TrigFunctions.cos(new Variable("x")).evaluate(Map.of(x, 0.)), 0.0000001);
+		assertEquals(0, TrigFunctions.tan(new Variable("x")).evaluate(Map.of(x, 0.)), 0.0000001);
 		
-		assertEquals(Math.PI / 2, TrigFunctions.arcsin(new Variable("x")).calculateDouble(Map.of(x, 1.)), 0.0000001);
-		assertEquals(0, TrigFunctions.arcsin(new Variable("x")).calculateDouble(Map.of(x, 0.)), 0.0000001);
-		assertEquals(Math.PI / 2, TrigFunctions.arccos(new Variable("x")).calculateDouble(Map.of(x, 0.)), 0.0000001);
-		assertEquals(0, TrigFunctions.arccos(new Variable("x")).calculateDouble(Map.of(x, 1.)), 0.0000001);
-		assertEquals(0, TrigFunctions.arctan(new Variable("x")).calculateDouble(Map.of(x, 0.)), 0.0000001);
+		assertEquals(Math.PI / 2, TrigFunctions.arcsin(new Variable("x")).evaluate(Map.of(x, 1.)), 0.0000001);
+		assertEquals(0, TrigFunctions.arcsin(new Variable("x")).evaluate(Map.of(x, 0.)), 0.0000001);
+		assertEquals(Math.PI / 2, TrigFunctions.arccos(new Variable("x")).evaluate(Map.of(x, 0.)), 0.0000001);
+		assertEquals(0, TrigFunctions.arccos(new Variable("x")).evaluate(Map.of(x, 1.)), 0.0000001);
+		assertEquals(0, TrigFunctions.arctan(new Variable("x")).evaluate(Map.of(x, 0.)), 0.0000001);
 	}
 	
 	@Test

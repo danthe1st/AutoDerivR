@@ -13,8 +13,8 @@ public record UnaryFunction(String name,
 		UnaryOperator<Node> atomicDeriver) implements Node {
 	
 	@Override
-	public double calculateDouble(Map<Variable, Double> variableValues) {
-		return doubleCalculator.applyAsDouble(argument.calculateDouble(variableValues));
+	public double evaluate(Map<Variable, Double> variableValues) {
+		return doubleCalculator.applyAsDouble(argument.evaluate(variableValues));
 	}
 	
 	@Override

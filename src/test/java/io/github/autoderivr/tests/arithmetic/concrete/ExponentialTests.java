@@ -1,4 +1,4 @@
-package io.github.autoderivr.tests.arithmetic.basic.concrete;
+package io.github.autoderivr.tests.arithmetic.concrete;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +13,9 @@ import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Divide;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 import io.github.danthe1st.autoderivr.operations.arithmetic.concrete.Exponentials;
 
+/**
+ * @see Exponentials
+ */
 class ExponentialTests {
 	
 	@Test
@@ -24,11 +27,11 @@ class ExponentialTests {
 	@Test
 	void testCalculate() {
 		Variable x = new Variable("x");
-		assertEquals(8, Exponentials.power(new Constant(2), new Constant(3)).calculateDouble(Collections.emptyMap()));
-		assertEquals(4, Exponentials.power(new Constant(2), x).calculateDouble(Map.of(x, 2.0)));
+		assertEquals(8, Exponentials.power(new Constant(2), new Constant(3)).evaluate(Collections.emptyMap()));
+		assertEquals(4, Exponentials.power(new Constant(2), x).evaluate(Map.of(x, 2.0)));
 		
-		assertEquals(3, Exponentials.log(new Constant(2), new Constant(8)).calculateDouble(Collections.emptyMap()));
-		assertEquals(2, Exponentials.log(new Constant(2), x).calculateDouble(Map.of(x, 4.0)));
+		assertEquals(3, Exponentials.log(new Constant(2), new Constant(8)).evaluate(Collections.emptyMap()));
+		assertEquals(2, Exponentials.log(new Constant(2), x).evaluate(Map.of(x, 4.0)));
 	}
 	
 	@Test

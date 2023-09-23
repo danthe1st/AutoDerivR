@@ -14,7 +14,7 @@ sealed interface BinaryFunction extends Node permits Add, Subtract, Multiply, Di
 	double calculate(double left, double right);
 	
 	@Override
-	default double calculateDouble(Map<Variable, Double> variableValues) {
-		return calculate(left().calculateDouble(variableValues), right().calculateDouble(variableValues));
+	default double evaluate(Map<Variable, Double> variableValues) {
+		return calculate(left().evaluate(variableValues), right().evaluate(variableValues));
 	}
 }

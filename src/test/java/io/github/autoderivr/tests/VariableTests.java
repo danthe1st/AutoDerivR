@@ -11,22 +11,25 @@ import org.junit.jupiter.api.Test;
 import io.github.danthe1st.autoderivr.operations.Constant;
 import io.github.danthe1st.autoderivr.operations.Variable;
 
+/**
+ * @see Variable
+ */
 class VariableTests {
 	@Test
 	void testCalculateVariableNotFound() {
 		Variable x = new Variable("x");
 		Map<Variable, Double> empty = Collections.emptyMap();
-		assertThrows(IllegalStateException.class, () -> x.calculateDouble(empty));
+		assertThrows(IllegalStateException.class, () -> x.evaluate(empty));
 		
 		Map<Variable, Double> yMap = Map.of(new Variable("y"), 0.0);
-		assertThrows(IllegalStateException.class, () -> x.calculateDouble(yMap));
+		assertThrows(IllegalStateException.class, () -> x.evaluate(yMap));
 	}
 	
 	@Test
 	void testCalculateVariable() {
 		Variable x = new Variable("x");
-		assertEquals(13.37, x.calculateDouble(Map.of(x, 13.37)));
-		assertEquals(37, x.calculateDouble(Map.of(new Variable("y"), 13.0, x, 37.0)));
+		assertEquals(13.37, x.evaluate(Map.of(x, 13.37)));
+		assertEquals(37, x.evaluate(Map.of(new Variable("y"), 13.0, x, 37.0)));
 	}
 	
 	@Test

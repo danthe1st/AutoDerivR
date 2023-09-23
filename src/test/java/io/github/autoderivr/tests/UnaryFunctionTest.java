@@ -15,19 +15,22 @@ import io.github.danthe1st.autoderivr.operations.UnaryFunction;
 import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 
+/**
+ * @see UnaryFunction
+ */
 class UnaryFunctionTest {
 	
 	private Function<Node, UnaryFunction> identityFactory = UnaryFunction.factory("id", DoubleUnaryOperator.identity(), arg -> Constant.ONE);
 	
 	@Test
 	void testCalculate() {
-		assertEquals(1, identityFactory.apply(Constant.ONE).calculateDouble(Collections.emptyMap()));
+		assertEquals(1, identityFactory.apply(Constant.ONE).evaluate(Collections.emptyMap()));
 		Variable x = new Variable("x");
-		assertEquals(12.34, identityFactory.apply(x).calculateDouble(Map.of(x, 12.34)));
+		assertEquals(12.34, identityFactory.apply(x).evaluate(Map.of(x, 12.34)));
 		
 		UnaryFunction f = new UnaryFunction("f", new Multiply(new Constant(2), x), arg -> arg + 1, arg -> Constant.ONE);
-		assertEquals(1, f.calculateDouble(Map.of(x, 0.)));
-		assertEquals(3, f.calculateDouble(Map.of(x, 1.)));
+		assertEquals(1, f.evaluate(Map.of(x, 0.)));
+		assertEquals(3, f.evaluate(Map.of(x, 1.)));
 	}
 	
 	@Test
@@ -68,5 +71,4 @@ class UnaryFunctionTest {
 				xSquare.reduce()
 		);
 	}
-	
 }

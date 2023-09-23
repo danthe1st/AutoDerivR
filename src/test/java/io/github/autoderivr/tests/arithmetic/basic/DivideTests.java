@@ -13,15 +13,18 @@ import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Divide;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Subtract;
 
+/**
+ * @see Divide
+ */
 class DivideTests {
 	
 	@Test
 	void testCalculate() {
 		Variable x = new Variable("x");
 		Variable y = new Variable("y");
-		assertEquals(1, new Divide(x, Constant.ONE).calculateDouble(Map.of(x, 1.)));
-		assertEquals(2, new Divide(x, Constant.ONE).calculateDouble(Map.of(x, 2.)));
-		assertEquals(2. / 3, new Divide(x, y).calculateDouble(Map.of(x, 2., y, 3.)), 0.000001);
+		assertEquals(1, new Divide(x, Constant.ONE).evaluate(Map.of(x, 1.)));
+		assertEquals(2, new Divide(x, Constant.ONE).evaluate(Map.of(x, 2.)));
+		assertEquals(2. / 3, new Divide(x, y).evaluate(Map.of(x, 2., y, 3.)), 0.000001);
 	}
 	
 	@Test

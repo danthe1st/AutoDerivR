@@ -10,14 +10,17 @@ import org.junit.jupiter.api.Test;
 import io.github.danthe1st.autoderivr.operations.Constant;
 import io.github.danthe1st.autoderivr.operations.Variable;
 
+/**
+ * @see Constant
+ */
 class ConstantTests {
 	@Test
 	void testConstants() {
 		assertEquals(0, Constant.ZERO.value());
 		assertEquals(1, Constant.ONE.value());
 		
-		assertEquals(0, Constant.ZERO.calculateDouble(Collections.emptyMap()));
-		assertEquals(1, Constant.ONE.calculateDouble(Map.of(new Variable("x"), 123.0)));
+		assertEquals(0, Constant.ZERO.evaluate(Collections.emptyMap()));
+		assertEquals(1, Constant.ONE.evaluate(Map.of(new Variable("x"), 123.0)));
 	}
 	
 	@Test

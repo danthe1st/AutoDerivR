@@ -6,6 +6,11 @@ import io.github.danthe1st.autoderivr.operations.UnaryFunction;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 
 public class Exponentials {
+	
+	private Exponentials() {
+		
+	}
+	
 	public static UnaryFunction power(Constant base, Node exponent) {
 		return new UnaryFunction(
 				"pow[" + base + "]", exponent, arg -> Math.pow(base.value(), arg),

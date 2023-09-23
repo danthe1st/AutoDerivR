@@ -10,15 +10,18 @@ import io.github.danthe1st.autoderivr.operations.Constant;
 import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
 
+/**
+ * @see Add
+ */
 class AddTests {
 	
 	@Test
 	void testCalculate() {
 		Variable x = new Variable("x");
 		Variable y = new Variable("y");
-		assertEquals(2, new Add(x, Constant.ONE).calculateDouble(Map.of(x, 1.)));
-		assertEquals(3, new Add(x, Constant.ONE).calculateDouble(Map.of(x, 2.)));
-		assertEquals(5, new Add(x, y).calculateDouble(Map.of(x, 2., y, 3.)));
+		assertEquals(2, new Add(x, Constant.ONE).evaluate(Map.of(x, 1.)));
+		assertEquals(3, new Add(x, Constant.ONE).evaluate(Map.of(x, 2.)));
+		assertEquals(5, new Add(x, y).evaluate(Map.of(x, 2., y, 3.)));
 	}
 	
 	@Test
