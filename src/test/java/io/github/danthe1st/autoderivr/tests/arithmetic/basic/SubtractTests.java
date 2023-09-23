@@ -1,4 +1,4 @@
-package io.github.autoderivr.tests.arithmetic.basic;
+package io.github.danthe1st.autoderivr.tests.arithmetic.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

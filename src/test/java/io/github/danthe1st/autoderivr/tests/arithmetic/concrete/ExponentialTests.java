@@ -1,4 +1,4 @@
-package io.github.autoderivr.tests.arithmetic.concrete;
+package io.github.danthe1st.autoderivr.tests.arithmetic.concrete;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
