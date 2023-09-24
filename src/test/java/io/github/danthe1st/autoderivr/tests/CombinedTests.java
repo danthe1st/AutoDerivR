@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import io.github.danthe1st.autoderivr.operations.Constant;
 import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
+import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Divide;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Subtract;
 import io.github.danthe1st.autoderivr.operations.arithmetic.concrete.Exponentials;
@@ -72,6 +73,32 @@ class CombinedTests {
 								new Add(new Multiply(x, x), Constant.ONE),
 								Exponentials.power(e, new Multiply(x, x))
 						)
+				).derivative(x).toString()
+		);
+	}
+	
+	@Test
+	void testSigmoid() {
+		Variable x = new Variable("x");
+		Constant e = new Constant(Math.E);
+		assertEquals(
+				new Divide(
+						new Subtract(
+								Constant.ZERO,
+								new Multiply(
+										new Multiply(Exponentials.power(e, new Subtract(Constant.ZERO, x)), Exponentials.log(e, e)),
+										new Subtract(Constant.ZERO, Constant.ONE)
+								)
+						),
+						new Multiply(
+								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x))),
+								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x)))
+						)
+				).toString(),
+				// (1/(1+e^(-x)))'
+				new Divide(
+						Constant.ONE,
+						new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x)))
 				).derivative(x).toString()
 		);
 	}
