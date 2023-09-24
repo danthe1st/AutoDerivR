@@ -82,17 +82,22 @@ class CombinedTests {
 		Variable x = new Variable("x");
 		Constant e = new Constant(Math.E);
 		assertEquals(
+				// (0-((e^(0-x)*ln(e))*(0-1)))/((1+e^(0-x))*(1+e^(0-x)))
 				new Divide(
+						// 0-((e^(0-x)*ln(e))*(0-1))
 						new Subtract(
 								Constant.ZERO,
+								// (e^(0-x)*ln(e))*(0-1)
 								new Multiply(
+										// e^(0-x)*ln(e)
 										new Multiply(Exponentials.power(e, new Subtract(Constant.ZERO, x)), Exponentials.log(e, e)),
-										new Subtract(Constant.ZERO, Constant.ONE)
+										new Subtract(Constant.ZERO, Constant.ONE)// 0-1
 								)
 						),
+						// (1+e^(0-x))*(1+e^(0-x))
 						new Multiply(
-								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x))),
-								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x)))
+								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x))), // 1+e^(0-x)
+								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x)))// 1+e^(0-x)
 						)
 				).toString(),
 				// (1/(1+e^(-x)))'
