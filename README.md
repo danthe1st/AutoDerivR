@@ -15,6 +15,7 @@ The following operations are supported:
 - basic arithmetic: addition, subtraction, multiplication, division
 - powers and logarithms
 - trigonometric functions: sine, cosine, tangent and their inverses
+- Piecewise defined functions
 
 ## Setup
 This project uses [Maven](https://maven.apache.org/download.cgi) and requires [Java 21](https://jdk.java.net/21/).
