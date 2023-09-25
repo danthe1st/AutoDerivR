@@ -44,10 +44,10 @@ class CombinedTests {
 												// ((((x*x)+1.0)
 												x.square().add(1),
 												// ((e^(x*x)*ln(e))*(x+x)))
-												Exponentials.power(e, x.square()).multiply(Exponentials.log(e, e)).multiply(x.add(x))
+												Exponentials.exp(e, x.square()).multiply(Exponentials.log(e, e)).multiply(x.add(x))
 										),
 										// ((x+x)*e^(x*x))))
-										x.add(x).multiply(Exponentials.power(e, x.square()))
+										x.add(x).multiply(Exponentials.exp(e, x.square()))
 								)
 						),
 						new Multiply(
@@ -62,13 +62,13 @@ class CombinedTests {
 										)
 								),
 								// (((x*x)+1.0)*e^(x*x)))
-								x.square().add(1).multiply(Exponentials.power(e, x.square()))
+								x.square().add(1).multiply(Exponentials.exp(e, x.square()))
 						)
 				).toString(),
 				// (sin(cos(x)^2)(x^2+1)e^(x^2))'
 				new Multiply(
 						TrigFunctions.sin(TrigFunctions.cos(x).square()),
-						x.square().add(1).multiply(Exponentials.power(e, x.square()))
+						x.square().add(1).multiply(Exponentials.exp(e, x.square()))
 				).derivative(x).toString()
 		);
 	}
@@ -83,15 +83,15 @@ class CombinedTests {
 						// -((e^(0-x)*ln(e))*(0-1))
 						new Multiply(
 								// e^(-x)*ln(e)
-								Exponentials.power(e, x.negate()).multiply(Exponentials.log(e, e)),
+								Exponentials.exp(e, x.negate()).multiply(Exponentials.log(e, e)),
 								Constant.ONE.negate()// 0-1
 						).negate(),
 						// (1+e^(0-x))*(1+e^(0-x))
-						Constant.ONE.add(Exponentials.power(e, x.negate())).square()
+						Constant.ONE.add(Exponentials.exp(e, x.negate())).square()
 				).toString(),
 				// (1/(1+e^(-x)))'
 				Constant.ONE.divide(
-						Constant.ONE.add(Exponentials.power(e, x.negate()))
+						Constant.ONE.add(Exponentials.exp(e, x.negate()))
 				).derivative(x).toString()
 		);
 	}

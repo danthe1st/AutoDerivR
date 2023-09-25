@@ -13,7 +13,7 @@ Examples can be found in the [tests](src/test/java), e.g. the [`CombinedTests`](
 ### Supported operations
 The following operations are supported:
 - basic arithmetic: addition, subtraction, multiplication, division
-- exponentials (with a constant base) and logarithms
+- powers (with a constant exponent), exponentials (with a constant base), logarithms (with a constant base) and roots (with a constant index)
 - trigonometric functions: sine, cosine, tangent and their inverses
 - Piecewise defined functions
 
