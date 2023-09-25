@@ -39,7 +39,7 @@ class UnaryFunctionTest {
 		assertEquals(Constant.ONE, identityFactory.apply(x).derivative(x));
 		assertEquals(
 				new Constant(2),
-				identityFactory.apply(new Multiply(new Constant(2), x)).derivative(x)
+				identityFactory.apply(new Constant(2).multiply(x)).derivative(x)
 		);
 		
 		UnaryFunction f = new UnaryFunction("f", new Multiply(new Constant(2), x), arg -> arg + 1, arg -> Constant.ONE);
@@ -53,7 +53,7 @@ class UnaryFunctionTest {
 		assertEquals("id(x)", identityFactory.apply(x).toString());
 		assertEquals("id(2.0*x)", identityFactory.apply(new Multiply(new Constant(2.0), x)).toString());
 		
-		UnaryFunction f = new UnaryFunction("f", new Multiply(new Constant(3), x), arg -> 3 * arg, arg -> new Constant(3));
+		UnaryFunction f = new UnaryFunction("f", new Constant(3).multiply(x), arg -> 3 * arg, arg -> new Constant(3));
 		assertEquals("f(3.0*x)", f.toString());
 	}
 	
@@ -62,10 +62,10 @@ class UnaryFunctionTest {
 		Variable x = new Variable("x");
 		assertEquals(
 				identityFactory.apply(x),
-				identityFactory.apply(new Multiply(Constant.ONE, x)).reduce()
+				identityFactory.apply(Constant.ONE.multiply(x)).reduce()
 		);
 		
-		UnaryFunction xSquare = identityFactory.apply(new Multiply(x, x));
+		UnaryFunction xSquare = identityFactory.apply(x.square());
 		assertEquals(
 				xSquare,
 				xSquare.reduce()

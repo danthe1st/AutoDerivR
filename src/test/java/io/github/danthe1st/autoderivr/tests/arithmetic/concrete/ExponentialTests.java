@@ -41,19 +41,17 @@ class ExponentialTests {
 		Constant e = new Constant(Math.E);
 		assertEquals(
 				// (2^x)ln(2)
-				new Multiply(
-						Exponentials.power(two, x),
-						Exponentials.log(e, two)
-				).toString(),
+				Exponentials.power(two, x)
+					.multiply(Exponentials.log(e, two))
+					.toString(),
 				// (2^x)'
 				Exponentials.power(two, x).derivative(x).toString()
 		);
 		assertEquals(
 				// e^x=(e^x)ln(e)
-				new Multiply(
-						Exponentials.power(e, x),
-						Exponentials.log(e, e)
-				).toString(),
+				Exponentials.power(e, x)
+					.multiply(Exponentials.log(e, e))
+					.toString(),
 				// (e^x)'
 				Exponentials.power(e, x).derivative(x).toString()
 		);
@@ -68,13 +66,11 @@ class ExponentialTests {
 		
 		assertEquals(
 				// 1/(x*ln(2))=1/((2^log2(x))*ln(2))
-				new Divide(
-						Constant.ONE,
-						new Multiply(
-								Exponentials.power(two, Exponentials.log(two, x)),
-								Exponentials.log(e, two)
-						)
-				).toString(),
+				Constant.ONE
+					.divide(
+							Exponentials.power(two, Exponentials.log(two, x))
+								.multiply(Exponentials.log(e, two))
+					).toString(),
 				// log2(x)'
 				Exponentials.log(two, x).derivative(x).toString()
 		);

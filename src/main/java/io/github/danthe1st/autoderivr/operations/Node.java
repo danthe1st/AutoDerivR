@@ -2,6 +2,11 @@ package io.github.danthe1st.autoderivr.operations;
 
 import java.util.Map;
 
+import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
+import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Divide;
+import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
+import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Subtract;
+
 /**
  * Represents a computation/function.
  *
@@ -34,5 +39,47 @@ public interface Node {
 	 */
 	default Node reduce() {
 		return this;
+	}
+	
+	// utility methods
+	
+	default Node add(Node other) {
+		return new Add(this, other);
+	}
+	
+	default Node add(double other) {
+		return add(new Constant(other));
+	}
+	
+	default Node subtract(Node other) {
+		return new Subtract(this, other);
+	}
+	
+	default Node subtract(double other) {
+		return subtract(new Constant(other));
+	}
+	
+	default Node negate() {
+		return Constant.ZERO.subtract(this);
+	}
+	
+	default Node multiply(Node other) {
+		return new Multiply(this, other);
+	}
+	
+	default Node multiply(double other) {
+		return multiply(new Constant(other));
+	}
+	
+	default Node square() {
+		return multiply(this);
+	}
+	
+	default Node divide(Node other) {
+		return new Divide(this, other);
+	}
+	
+	default Node divide(double other) {
+		return divide(new Constant(other));
 	}
 }

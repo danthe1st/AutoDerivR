@@ -9,7 +9,6 @@ import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Divide;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
-import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Subtract;
 import io.github.danthe1st.autoderivr.operations.arithmetic.concrete.Exponentials;
 import io.github.danthe1st.autoderivr.operations.arithmetic.concrete.TrigFunctions;
 
@@ -43,12 +42,12 @@ class CombinedTests {
 								new Add(
 										new Multiply(
 												// ((((x*x)+1.0)
-												new Add(new Multiply(x, x), Constant.ONE),
+												x.square().add(1),
 												// ((e^(x*x)*ln(e))*(x+x)))
-												new Multiply(new Multiply(Exponentials.power(e, new Multiply(x, x)), Exponentials.log(e, e)), new Add(x, x))
+												Exponentials.power(e, x.square()).multiply(Exponentials.log(e, e)).multiply(x.add(x))
 										),
 										// ((x+x)*e^(x*x))))
-										new Multiply(new Add(x, x), Exponentials.power(e, new Multiply(x, x)))
+										x.add(x).multiply(Exponentials.power(e, x.square()))
 								)
 						),
 						new Multiply(
@@ -57,22 +56,19 @@ class CombinedTests {
 										TrigFunctions.cos(new Multiply(TrigFunctions.cos(x), TrigFunctions.cos(x))),
 										new Add(
 												// ((cos(x)*(0.0-sin(x)))
-												new Multiply(TrigFunctions.cos(x), new Subtract(Constant.ZERO, TrigFunctions.sin(x))),
+												new Multiply(TrigFunctions.cos(x), TrigFunctions.sin(x).negate()),
 												// ((0.0-sin(x))*cos(x))))
-												new Multiply(new Subtract(Constant.ZERO, TrigFunctions.sin(x)), TrigFunctions.cos(x))
+												new Multiply(TrigFunctions.sin(x).negate(), TrigFunctions.cos(x))
 										)
 								),
 								// (((x*x)+1.0)*e^(x*x)))
-								new Multiply(new Add(new Multiply(x, x), Constant.ONE), Exponentials.power(e, new Multiply(x, x)))
+								x.square().add(1).multiply(Exponentials.power(e, x.square()))
 						)
 				).toString(),
 				// (sin(cos(x)^2)(x^2+1)e^(x^2))'
 				new Multiply(
-						TrigFunctions.sin(new Multiply(TrigFunctions.cos(x), TrigFunctions.cos(x))),
-						new Multiply(
-								new Add(new Multiply(x, x), Constant.ONE),
-								Exponentials.power(e, new Multiply(x, x))
-						)
+						TrigFunctions.sin(TrigFunctions.cos(x).square()),
+						x.square().add(1).multiply(Exponentials.power(e, x.square()))
 				).derivative(x).toString()
 		);
 	}
@@ -82,28 +78,20 @@ class CombinedTests {
 		Variable x = new Variable("x");
 		Constant e = new Constant(Math.E);
 		assertEquals(
-				// (0-((e^(0-x)*ln(e))*(0-1)))/((1+e^(0-x))*(1+e^(0-x)))
+				// (-((e^(-x)*ln(e))*(0-1)))/((1+e^(0-x))*(1+e^(-x)))
 				new Divide(
-						// 0-((e^(0-x)*ln(e))*(0-1))
-						new Subtract(
-								Constant.ZERO,
-								// (e^(0-x)*ln(e))*(0-1)
-								new Multiply(
-										// e^(0-x)*ln(e)
-										new Multiply(Exponentials.power(e, new Subtract(Constant.ZERO, x)), Exponentials.log(e, e)),
-										new Subtract(Constant.ZERO, Constant.ONE)// 0-1
-								)
-						),
-						// (1+e^(0-x))*(1+e^(0-x))
+						// -((e^(0-x)*ln(e))*(0-1))
 						new Multiply(
-								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x))), // 1+e^(0-x)
-								new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x)))// 1+e^(0-x)
-						)
+								// e^(-x)*ln(e)
+								Exponentials.power(e, x.negate()).multiply(Exponentials.log(e, e)),
+								Constant.ONE.negate()// 0-1
+						).negate(),
+						// (1+e^(0-x))*(1+e^(0-x))
+						Constant.ONE.add(Exponentials.power(e, x.negate())).square()
 				).toString(),
 				// (1/(1+e^(-x)))'
-				new Divide(
-						Constant.ONE,
-						new Add(Constant.ONE, Exponentials.power(e, new Subtract(Constant.ZERO, x)))
+				Constant.ONE.divide(
+						Constant.ONE.add(Exponentials.power(e, x.negate()))
 				).derivative(x).toString()
 		);
 	}
