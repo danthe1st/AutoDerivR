@@ -27,7 +27,7 @@ public record Multiply(Node left, Node right) implements BinaryFunction {
 	@Override
 	public Node reduce() {
 		Node reduced = Reducer.reduceCommutativeWithNeutralValue(this, Constant.ONE, Multiply::new);
-		if(reduced instanceof Multiply(Node left, Node right) && (Constant.ZERO.equals(left) || Constant.ZERO.equals(right))){
+		if(reduced instanceof Multiply(Node l, Node r) && (Constant.ZERO.equals(l) || Constant.ZERO.equals(r))){
 			return Constant.ZERO;
 		}
 		return reduced;

@@ -24,8 +24,8 @@ public record Add(Node left, Node right) implements BinaryFunction {
 	@Override
 	public Node reduce() {
 		Node reduced = Reducer.reduceCommutativeWithNeutralValue(this, Constant.ZERO, Add::new);
-		if(reduced instanceof Add(Node left, Node right) && left.equals(right)){
-			return new Multiply(new Constant(2), right);
+		if(reduced instanceof Add(Node l, Node r) && l.equals(r)){
+			return new Multiply(new Constant(2), r);
 		}
 		return reduced;
 	}

@@ -25,7 +25,7 @@ public record Subtract(Node left, Node right) implements BinaryFunction {
 	public Node reduce() {
 		Node reduced = Reducer.reduceWithRightNeutralValue(this, Constant.ZERO, Subtract::new);
 		
-		if(reduced instanceof Subtract(Node left, Node right) && left.equals(right)){
+		if(reduced instanceof Subtract(Node l, Node r) && l.equals(r)){
 			return Constant.ZERO;
 		}
 		
