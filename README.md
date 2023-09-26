@@ -7,6 +7,7 @@ This program can calculate calculate derivatives based on a computation tree.
 The class [`Node`](src/main/java/io/github/danthe1st/autoderivr/operations/Node.java) represents a calculation.
 `Node`s can be evaluated with certain values of variables.
 Also, it is possible to symbolically calculate the derivative of a `Node` with respect to a given `Variable` using the `derivative` method.
+This project is also capable to perform some simplifications (e.g. remove additions/multiplications with 0)
 
 Examples can be found in the [tests](src/test/java), e.g. the [`CombinedTests`](src/test/java/io/github/danthe1st/autoderivr/tests/CombinedTests.java) or [`TrigTests`](src/test/java/io/github/danthe1st/autoderivr/tests/arithmetic/concrete/TrigTests.java) classes.
 

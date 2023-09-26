@@ -27,7 +27,7 @@ public class Exponentials {
 	}
 	
 	public static Node pow(Node base, Constant exponent) {
-		if(isZero(exponent)){
+		if(Constant.ZERO.equals(exponent)){
 			return new Constant(1);
 		}
 		return new UnaryFunction(
@@ -37,13 +37,9 @@ public class Exponentials {
 	}
 	
 	public static Node root(Constant index, Node radicant) {
-		if(isZero(index)){
+		if(Constant.ZERO.equals(index)){
 			return ErrorNode.INSTANCE;
 		}
 		return pow(radicant, new Constant(1 / index.value()));
-	}
-	
-	private static boolean isZero(Constant constant) {
-		return constant.value() == 0. || constant.value() == -0.;
 	}
 }

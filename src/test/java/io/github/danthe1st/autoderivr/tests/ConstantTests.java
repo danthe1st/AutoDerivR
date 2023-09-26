@@ -1,6 +1,8 @@
 package io.github.danthe1st.autoderivr.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Collections;
 import java.util.Map;
@@ -35,5 +37,16 @@ class ConstantTests {
 		assertEquals("0.0", Constant.ZERO.toString());
 		assertEquals("1.0", Constant.ONE.toString());
 		assertEquals("13.37", new Constant(13.37).toString());
+	}
+	
+	@Test
+	void testEquality() {
+		assertEquals(Constant.ZERO, Constant.ZERO);
+		assertEquals(Constant.ZERO, new Constant(0));
+		assertEquals(Constant.ZERO, new Constant(-0.));
+		assertEquals(new Constant(-0.), new Constant(0));
+		assertNotEquals(new Constant(-1), Constant.ONE);
+		assertFalse(Constant.ONE.equals(null));
+		assertFalse(Constant.ONE.equals(new Object()));
 	}
 }

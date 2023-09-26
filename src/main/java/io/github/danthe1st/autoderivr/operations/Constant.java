@@ -25,4 +25,10 @@ public record Constant(double value) implements Node {
 	public String toString() {
 		return "" + value;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Constant(double otherValue)) && value == otherValue;
+	}
+	
 }
