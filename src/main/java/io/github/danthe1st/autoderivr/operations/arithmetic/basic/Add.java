@@ -23,7 +23,11 @@ public record Add(Node left, Node right) implements BinaryFunction {
 	
 	@Override
 	public Node reduce() {
-		return Reducer.reduceCommutativeWithNeutralValue(this, Constant.ZERO, Add::new);
+		Node reduced = Reducer.reduceCommutativeWithNeutralValue(this, Constant.ZERO, Add::new);
+		if(reduced instanceof Add(Node left, Node right) && left.equals(right)){
+			return new Multiply(new Constant(2), right);
+		}
+		return reduced;
 	}
 	
 }

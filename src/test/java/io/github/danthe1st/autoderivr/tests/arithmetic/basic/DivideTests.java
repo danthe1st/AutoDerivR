@@ -79,7 +79,7 @@ class DivideTests {
 		Variable y = new Variable("y");
 		assertEquals("x/y", new Divide(x, y).toString());
 		assertEquals("x", new Divide(x, Constant.ONE).toString());
-		assertEquals("0.0/x", new Divide(Constant.ZERO, x).toString());
+		assertEquals("1.0/x", new Divide(Constant.ONE, x).toString());
 		assertEquals("x/(y+1.0)", new Divide(x, new Add(y, Constant.ONE)).toString());
 	}
 	
@@ -91,5 +91,7 @@ class DivideTests {
 		assertEquals(new Divide(x, new Constant(2)), new Divide(x, new Constant(2)).reduce());
 		assertEquals(x, new Divide(x, Constant.ONE).reduce());
 		assertEquals(new Divide(Constant.ONE, x), new Divide(Constant.ONE, x).reduce());
+		assertEquals(Constant.ZERO, new Divide(Constant.ZERO, x).reduce());
+		assertEquals(Constant.ONE, new Divide(x, x).reduce());
 	}
 }

@@ -54,5 +54,6 @@ class SubtractTests {
 		assertEquals(new Subtract(x, Constant.ONE), new Subtract(x, Constant.ONE).reduce());
 		assertEquals(x, new Subtract(x, Constant.ZERO).reduce());
 		assertEquals(new Subtract(Constant.ZERO, x), new Subtract(Constant.ZERO, x).reduce());
+		assertEquals(Constant.ZERO, new Subtract(x, x).reduce());
 	}
 }

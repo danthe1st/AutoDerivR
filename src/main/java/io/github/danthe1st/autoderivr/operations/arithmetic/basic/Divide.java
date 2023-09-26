@@ -29,7 +29,16 @@ public record Divide(Node left, Node right) implements BinaryFunction {
 	
 	@Override
 	public Node reduce() {
-		return Reducer.reduceWithRightNeutralValue(this, Constant.ONE, Divide::new);
+		Node reduced = Reducer.reduceWithRightNeutralValue(this, Constant.ONE, Divide::new);
+		if(reduced instanceof Divide(Node l, Node r)){
+			if(Constant.ZERO.equals(l)){
+				return Constant.ZERO;
+			}
+			if(left.equals(r)){
+				return Constant.ONE;
+			}
+		}
+		return reduced;
 	}
 	
 }

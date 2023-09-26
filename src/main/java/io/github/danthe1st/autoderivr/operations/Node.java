@@ -34,6 +34,7 @@ public interface Node {
 	 * Attempt basic simplifications on this computation/function.
 	 * @implSpec If this function is valid (e.g. no division by 0), this method must not change the behaviour of the computation.
 	 * Calling this function repeatedly must lead to a fix point in finite time.
+	 * Invalid functions (e.g. 0*(0/0)) may become valid after reduction.
 	 *
 	 * @return the simplified function
 	 */

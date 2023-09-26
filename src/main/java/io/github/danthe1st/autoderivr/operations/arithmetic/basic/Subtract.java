@@ -23,6 +23,12 @@ public record Subtract(Node left, Node right) implements BinaryFunction {
 	
 	@Override
 	public Node reduce() {
-		return Reducer.reduceWithRightNeutralValue(this, Constant.ZERO, Subtract::new);
+		Node reduced = Reducer.reduceWithRightNeutralValue(this, Constant.ZERO, Subtract::new);
+		
+		if(reduced instanceof Subtract(Node left, Node right) && left.equals(right)){
+			return Constant.ZERO;
+		}
+		
+		return reduced;
 	}
 }

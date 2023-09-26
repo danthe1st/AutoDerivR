@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import io.github.danthe1st.autoderivr.operations.Constant;
 import io.github.danthe1st.autoderivr.operations.Variable;
 import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Add;
+import io.github.danthe1st.autoderivr.operations.arithmetic.basic.Multiply;
 
 /**
  * @see Add
@@ -51,5 +52,6 @@ class AddTests {
 		assertEquals(new Add(x, Constant.ONE), new Add(x, Constant.ONE).reduce());
 		assertEquals(x, new Add(x, Constant.ZERO).reduce());
 		assertEquals(x, new Add(Constant.ZERO, x).reduce());
+		assertEquals(new Multiply(new Constant(2), x), new Add(x, x).reduce());
 	}
 }
