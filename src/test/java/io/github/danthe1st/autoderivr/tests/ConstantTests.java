@@ -49,4 +49,10 @@ class ConstantTests {
 		assertFalse(Constant.ONE.equals(null));
 		assertFalse(Constant.ONE.equals(new Object()));
 	}
+	
+	@Test
+	void testHashCode() {
+		assertEquals(Constant.ZERO.hashCode(), new Constant(-0.).hashCode());
+		assertEquals(Double.hashCode(1), Constant.ONE.hashCode());
+	}
 }

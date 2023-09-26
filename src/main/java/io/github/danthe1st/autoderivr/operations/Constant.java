@@ -27,6 +27,14 @@ public record Constant(double value) implements Node {
 	}
 	
 	@Override
+	public int hashCode() {
+		if(equals(ZERO)){
+			return Double.hashCode(ZERO.value());
+		}
+		return Double.hashCode(value());
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		return (obj instanceof Constant(double otherValue)) && value == otherValue;
 	}
