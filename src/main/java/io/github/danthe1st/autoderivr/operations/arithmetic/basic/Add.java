@@ -1,10 +1,17 @@
 package io.github.danthe1st.autoderivr.operations.arithmetic.basic;
 
+import java.util.Objects;
+
 import io.github.danthe1st.autoderivr.operations.Constant;
 import io.github.danthe1st.autoderivr.operations.Node;
 import io.github.danthe1st.autoderivr.operations.Variable;
 
 public record Add(Node left, Node right) implements BinaryFunction {
+	
+	public Add {
+		Objects.requireNonNull(left);
+		Objects.requireNonNull(right);
+	}
 	
 	@Override
 	public Node derivative(Variable variable) {

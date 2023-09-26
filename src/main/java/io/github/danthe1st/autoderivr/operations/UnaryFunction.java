@@ -23,6 +23,13 @@ public record UnaryFunction(String name,
 		DoubleUnaryOperator doubleCalculator,
 		UnaryOperator<Node> atomicDeriver) implements Node {
 	
+	public UnaryFunction {
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(argument);
+		Objects.requireNonNull(doubleCalculator);
+		Objects.requireNonNull(atomicDeriver);
+	}
+	
 	@Override
 	public double evaluate(Map<Variable, Double> variableValues) {
 		return doubleCalculator.applyAsDouble(argument.evaluate(variableValues));

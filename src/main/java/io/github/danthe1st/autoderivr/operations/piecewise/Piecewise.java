@@ -1,6 +1,7 @@
 package io.github.danthe1st.autoderivr.operations.piecewise;
 
 import java.util.Map;
+import java.util.Objects;
 
 import io.github.danthe1st.autoderivr.operations.Node;
 import io.github.danthe1st.autoderivr.operations.Variable;
@@ -26,6 +27,13 @@ public record Piecewise(
 		Comparison condition,
 		Node smaller, Node greater,
 		Node equal) implements Node {
+	
+	public Piecewise {
+		Objects.requireNonNull(condition);
+		Objects.requireNonNull(smaller);
+		Objects.requireNonNull(greater);
+		Objects.requireNonNull(equal);
+	}
 	
 	@Override
 	public double evaluate(Map<Variable, Double> variableValues) {

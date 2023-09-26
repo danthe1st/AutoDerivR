@@ -1,6 +1,7 @@
 package io.github.danthe1st.autoderivr.operations;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Represents a variable in a function.
@@ -8,6 +9,10 @@ import java.util.Map;
  * @param identifier the name of the variable.
  */
 public record Variable(String identifier) implements Node {
+	
+	public Variable {
+		Objects.requireNonNull(identifier);
+	}
 	
 	@Override
 	public double evaluate(Map<Variable, Double> variableValues) {
