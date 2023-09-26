@@ -1,6 +1,8 @@
 package io.github.danthe1st.autoderivr.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.Collections;
 import java.util.Map;
@@ -70,5 +72,53 @@ class UnaryFunctionTest {
 				xSquare,
 				xSquare.reduce()
 		);
+	}
+	
+	@Test
+	void testEquality() {
+		Variable x = new Variable("x");
+		Variable y = new Variable("y");
+		assertFalse(identityFactory.apply(x).equals(null));
+		assertFalse(identityFactory.apply(x).equals(new Object()));
+		assertEquals(identityFactory.apply(x), identityFactory.apply(x));
+		assertNotEquals(identityFactory.apply(x), identityFactory.apply(y));
+		UnaryFunction function = new UnaryFunction("a", x, createOperatorUsingVariable(x), a -> Constant.ZERO);
+		assertEquals(function, function);
+		assertEquals(new UnaryFunction("a", x, createOperatorUsingVariable(x), a -> Constant.ZERO), function);
+		assertNotEquals(new UnaryFunction("b", x, createOperatorUsingVariable(x), a -> Constant.ZERO), function);
+		assertNotEquals(new UnaryFunction("a", y, createOperatorUsingVariable(x), a -> Constant.ZERO), function);
+		assertNotEquals(new UnaryFunction("a", x, createDifferentOperatorUsingVariable(x), a -> Constant.ZERO), function);
+		assertEquals(createUnaryFunctionWithAnonymousClass(true), createUnaryFunctionWithAnonymousClass(true));
+		assertNotEquals(createUnaryFunctionWithAnonymousClass(false), createUnaryFunctionWithAnonymousClass(false));
+	}
+	
+	@Test
+	void testHashCode() {
+		Variable x = new Variable("x");
+		assertEquals(identityFactory.apply(x).hashCode(), identityFactory.apply(x).hashCode());
+	}
+	
+	private DoubleUnaryOperator createOperatorUsingVariable(Object o) {
+		return d -> d + o.toString().length();
+	}
+	
+	private DoubleUnaryOperator createDifferentOperatorUsingVariable(Object o) {
+		return d -> d + o.toString().length() + 1;
+	}
+	
+	private UnaryFunction createUnaryFunctionWithAnonymousClass(boolean equalsIsTrue) {
+		DoubleUnaryOperator op = new DoubleUnaryOperator() {
+			
+			@Override
+			public double applyAsDouble(double operand) {
+				return 0;
+			}
+			
+			@Override
+			public boolean equals(Object obj) {
+				return equalsIsTrue;
+			}
+		};
+		return new UnaryFunction("a", Constant.ZERO, op, n -> n);
 	}
 }

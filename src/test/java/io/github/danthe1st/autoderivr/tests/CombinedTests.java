@@ -19,15 +19,15 @@ class CombinedTests {
 		Constant e = new Constant(Math.E);
 		assertEquals(
 		// @formatter:off
-//							(sin(cos(x)*cos(x))
+//							(sin(cos(x)^2)
 //						*
-//									((((x*x)+1.0)
+//									((((x^2)+1.0)
 //								*
-//									((e^(x*x)*ln(e))*(x+x)))
+//									((e^(x^2)*ln(e))*(2*x)))
 //							+
 //								((x+x)*e^(x*x))))
 //					+
-//								((cos(cos(x)*cos(x))
+//								((cos(cos(x)^2)
 //							*
 //									((cos(x)*(0.0-sin(x)))
 //								+
@@ -37,14 +37,14 @@ class CombinedTests {
 		// @formatter:on
 				new Add(
 						new Multiply(
-								// (sin(cos(x)*cos(x))
-								TrigFunctions.sin(new Multiply(TrigFunctions.cos(x), TrigFunctions.cos(x))),
+								// (sin(cos(x)^2)
+								TrigFunctions.sin(TrigFunctions.cos(x).square()),
 								new Add(
 										new Multiply(
-												// ((((x*x)+1.0)
+												// ((((x^2)+1.0)
 												x.square().add(1),
-												// ((e^(x*x)*ln(e))*(x+x)))
-												Exponentials.exp(e, x.square()).multiply(Exponentials.log(e, e)).multiply(x.add(x))
+												// ((e^(x^2)*ln(e))*(2*x)))
+												Exponentials.exp(e, x.square()).multiply(Exponentials.log(e, e)).multiply(new Constant(2).multiply(x))
 										),
 										// ((x+x)*e^(x*x))))
 										x.add(x).multiply(Exponentials.exp(e, x.square()))
@@ -52,8 +52,8 @@ class CombinedTests {
 						),
 						new Multiply(
 								new Multiply(
-										// ((cos(cos(x)*cos(x))
-										TrigFunctions.cos(new Multiply(TrigFunctions.cos(x), TrigFunctions.cos(x))),
+										// ((cos(cos(x)^2)
+										TrigFunctions.cos(TrigFunctions.cos(x).square()),
 										new Add(
 												// ((cos(x)*(0.0-sin(x)))
 												new Multiply(TrigFunctions.cos(x), TrigFunctions.sin(x).negate()),
@@ -64,12 +64,12 @@ class CombinedTests {
 								// (((x*x)+1.0)*e^(x*x)))
 								x.square().add(1).multiply(Exponentials.exp(e, x.square()))
 						)
-				).toString(),
+				).reduce(),
 				// (sin(cos(x)^2)(x^2+1)e^(x^2))'
 				new Multiply(
 						TrigFunctions.sin(TrigFunctions.cos(x).square()),
 						x.square().add(1).multiply(Exponentials.exp(e, x.square()))
-				).derivative(x).toString()
+				).derivative(x).reduce()
 		);
 	}
 	
@@ -88,11 +88,11 @@ class CombinedTests {
 						).negate(),
 						// (1+e^(0-x))*(1+e^(0-x))
 						Constant.ONE.add(Exponentials.exp(e, x.negate())).square()
-				).toString(),
+				),
 				// (1/(1+e^(-x)))'
 				Constant.ONE.divide(
 						Constant.ONE.add(Exponentials.exp(e, x.negate()))
-				).derivative(x).toString()
+				).derivative(x).reduce()
 		);
 	}
 }

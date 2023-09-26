@@ -49,21 +49,21 @@ class TrigTests {
 		Variable x = new Variable("x");
 		assertEquals(
 				// cos(x)
-				TrigFunctions.cos(x).toString(),
+				TrigFunctions.cos(x),
 				// sin(x)'
-				TrigFunctions.sin(x).derivative(x).toString()
+				TrigFunctions.sin(x).derivative(x)
 		);
 		assertEquals(
 				// -sin(x)
-				Constant.ZERO.subtract(TrigFunctions.sin(x)).toString(),
+				Constant.ZERO.subtract(TrigFunctions.sin(x)),
 				// cos(x)'
-				TrigFunctions.cos(x).derivative(x).toString()
+				TrigFunctions.cos(x).derivative(x)
 		);
 		assertEquals(
 				// tan(x)^2+1
-				TrigFunctions.tan(x).square().add(1).toString(),
+				TrigFunctions.tan(x).square().add(1),
 				// tan(x)'
-				TrigFunctions.tan(x).derivative(x).toString()
+				TrigFunctions.tan(x).derivative(x)
 		);
 	}
 	
@@ -72,15 +72,15 @@ class TrigTests {
 		Variable x = new Variable("x");
 		assertEquals(
 				// -sin(x)
-				TrigFunctions.sin(x).negate().toString(),
+				TrigFunctions.sin(x).negate(),
 				// sin(x)''
-				TrigFunctions.sin(x).derivative(x).derivative(x).toString()
+				TrigFunctions.sin(x).derivative(x).derivative(x)
 		);
 		assertEquals(
 				// -cos(x)
-				TrigFunctions.cos(x).negate().toString(),
+				TrigFunctions.cos(x).negate(),
 				// cos(x)''
-				TrigFunctions.cos(x).derivative(x).derivative(x).toString()
+				TrigFunctions.cos(x).derivative(x).derivative(x)
 		);
 		assertEquals(
 				// 2*tan(x)*(tan(x^2)+1) =
@@ -88,9 +88,9 @@ class TrigTests {
 				new Add(
 						TrigFunctions.tan(x).multiply(TrigFunctions.tan(x).square().add(1)),
 						TrigFunctions.tan(x).square().add(1).multiply(TrigFunctions.tan(x))
-				).toString(),
+				),
 				// tan(x)''
-				TrigFunctions.tan(x).derivative(x).derivative(x).toString()
+				TrigFunctions.tan(x).derivative(x).derivative(x).reduce()
 		);
 	}
 	
@@ -100,26 +100,23 @@ class TrigTests {
 		assertEquals(
 				// 1/cos(asin(x))
 				Constant.ONE
-					.divide(TrigFunctions.cos(TrigFunctions.arcsin(x)))
-					.toString(),
+					.divide(TrigFunctions.cos(TrigFunctions.arcsin(x))),
 				// asin(x)'
-				TrigFunctions.arcsin(x).derivative(x).toString()
+				TrigFunctions.arcsin(x).derivative(x)
 		);
 		assertEquals(
 				// 1/-sin(acos(x))
 				Constant.ONE
-					.divide(new Subtract(Constant.ZERO, TrigFunctions.sin(TrigFunctions.arccos(x))))
-					.toString(),
+					.divide(new Subtract(Constant.ZERO, TrigFunctions.sin(TrigFunctions.arccos(x)))),
 				// acos(x)'
-				TrigFunctions.arccos(x).derivative(x).toString()
+				TrigFunctions.arccos(x).derivative(x)
 		);
 		assertEquals(
 				// 1/((x^2)+1) = 1/((tan(atan(x))^2)+1)
 				Constant.ONE
-					.divide(TrigFunctions.tan(TrigFunctions.arctan(x)).square().add(1))
-					.toString(),
+					.divide(TrigFunctions.tan(TrigFunctions.arctan(x)).square().add(1)),
 				// atan(x)'
-				TrigFunctions.arctan(x).derivative(x).toString()
+				TrigFunctions.arctan(x).derivative(x)
 		);
 	}
 	

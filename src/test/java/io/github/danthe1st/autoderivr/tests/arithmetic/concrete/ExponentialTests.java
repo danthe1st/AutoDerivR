@@ -55,18 +55,16 @@ class ExponentialTests {
 		assertEquals(
 				// (2^x)ln(2)
 				Exponentials.exp(two, x)
-					.multiply(Exponentials.log(e, two))
-					.toString(),
+					.multiply(Exponentials.log(e, two)),
 				// (2^x)'
-				Exponentials.exp(two, x).derivative(x).toString()
+				Exponentials.exp(two, x).derivative(x)
 		);
 		assertEquals(
 				// e^x=(e^x)ln(e)
 				Exponentials.exp(e, x)
-					.multiply(Exponentials.log(e, e))
-					.toString(),
+					.multiply(Exponentials.log(e, e)),
 				// (e^x)'
-				Exponentials.exp(e, x).derivative(x).toString()
+				Exponentials.exp(e, x).derivative(x)
 		);
 	}
 	
@@ -82,9 +80,9 @@ class ExponentialTests {
 					.divide(
 							Exponentials.exp(two, Exponentials.log(two, x))
 								.multiply(Exponentials.log(e, two))
-					).toString(),
+					),
 				// log2(x)'
-				Exponentials.log(two, x).derivative(x).toString()
+				Exponentials.log(two, x).derivative(x)
 		);
 		
 		assertEquals(
@@ -95,9 +93,9 @@ class ExponentialTests {
 								Exponentials.exp(e, Exponentials.log(e, x)),
 								Exponentials.log(e, e)
 						)
-				).toString(),
+				),
 				// ln(x)'
-				Exponentials.log(e, x).derivative(x).toString()
+				Exponentials.log(e, x).derivative(x)
 		);
 	}
 	
@@ -109,10 +107,9 @@ class ExponentialTests {
 		assertEquals(
 				// (2^x)*3
 				Exponentials.pow(x, new Constant(2))
-					.multiply(3)
-					.toString(),
+					.multiply(3),
 				// (x^3)'
-				Exponentials.pow(x, new Constant(3)).derivative(x).toString()
+				Exponentials.pow(x, new Constant(3)).derivative(x)
 		);
 	}
 	
@@ -123,10 +120,9 @@ class ExponentialTests {
 		assertEquals(
 				// (2^x)*3
 				Exponentials.pow(x, new Constant(-0.5))
-					.multiply(0.5)
-					.toString(),
+					.multiply(0.5),
 				// (x^3)'
-				Exponentials.root(new Constant(2), x).derivative(x).toString()
+				Exponentials.root(new Constant(2), x).derivative(x)
 		);
 	}
 }
