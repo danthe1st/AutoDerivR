@@ -11,6 +11,9 @@ This project is also capable to perform some simplifications (e.g. remove additi
 
 Examples can be found in the [tests](src/test/java), e.g. the [`CombinedTests`](src/test/java/io/github/danthe1st/autoderivr/tests/CombinedTests.java) or [`TrigTests`](src/test/java/io/github/danthe1st/autoderivr/tests/arithmetic/concrete/TrigTests.java) classes.
 
+## Javadocs
+Javadocs can be found on [GitHub Pages](https://danthe1st.github.io/AutoDerivR/)
+
 ### Supported operations
 The following operations are supported:
 - basic arithmetic: addition, subtraction, multiplication, division
