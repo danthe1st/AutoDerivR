@@ -13,3 +13,27 @@ jobs:
         distribution: 'oracle'
     - name: Run tests
       run: mvn test
+  javadocs:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'oracle'
+    - name: generate Javadocs
+      run: mvn javadoc:javadoc
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: 'target/site/javadocs'
+    - name: push Javadocs to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
