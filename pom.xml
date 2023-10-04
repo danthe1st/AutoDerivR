@@ -46,14 +46,11 @@
 							<placement>a</placement>
 							<head>Implementation Requirements:</head>
 						</tag>
-						<tag>
+						<!--<tag>
 							<name>implNote</name>
 							<placement>a</placement>
 							<head>Implementation Note:</head>
-						</tag>
-						<!--<tag>apiNote:a:API Note:</tag>
-						<tag>implSpec:a:Implementation Requirements:</tag>
-						<tag>implNote:a:Implementation Note:</tag>-->
+						</tag>-->
 					</tags>
 				</configuration>
 			</plugin>

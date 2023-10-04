@@ -15,6 +15,7 @@ jobs:
       run: mvn test
   javadocs:
     if: github.ref == 'refs/heads/master'
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -33,7 +34,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
-        path: 'target/site/javadocs'
+        path: 'target/site/apidocs'
     - name: push Javadocs to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
